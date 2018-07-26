@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from './producto.model';
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -19,8 +20,9 @@ export class ProductComponent implements OnInit {
 
   agregarProducto() {
 
-    //let newProduct: Producto = new Producto(this.nombreProducto, this.precio);
-    this.listaProductos.push(this.producto);
+    let newProduct: Producto = new Producto(this.producto.getNombre, this.producto.getPrecio,this.producto.getTipoProducto);
+    this.producto=new Producto(null,null,null);
+    this.listaProductos.push(newProduct );
     
   }
 

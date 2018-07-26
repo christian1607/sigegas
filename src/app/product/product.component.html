@@ -1,48 +1,77 @@
 <div class="container">
   <h1>Registrar Producto</h1>
-  <form>
-    <div class="form-group">
-      <label for="txtNombreProducto">Nombre:</label>
+  <div class="col-xs-6">
+    <form>
+      <div class="form-group">
+        <label for="txtNombreProducto">Nombre:</label>
 
-      <input id="txtNombreProducto" type="text" class="form-control" name="txtNombreProducto" [(ngModel)]="producto.nombre" placeholder="ingrese nombre"
-        required />
+        <input id="txtNombreProducto" type="text" class="form-control" name="txtNombreProducto" [(ngModel)]="producto.nombre" placeholder="ingrese nombre"
+          required />
 
+      </div>
+      <div class="form-group">
+        <label for="txtPrecio">Precio:</label>
+        <input id="txtPrecio" type="text" class="form-control" name="txtPrecio" [(ngModel)]="producto.precio" placeholder="ingrese precio"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="cmbTipoProducto">Tipo producto:</label>
+        <select class="form-control" id="cmbTipoProducto" (change)=selectTipoProducto($event) required>
+          <option *ngFor="let tipoProducto of listaTipoProducto" [value]="tipoProducto">{{tipoProducto}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-6 col-xs-offset-3">
+          <button class="btn btn-primary" type="submit" (click)="agregarProducto()">Registrar</button>
+          <button class="btn btn-danger" type="submit" (click)="vaciarProductos()">Vaciar lista</button>
+        </div>
+        <div class="col-xs-3"></div>
+      </div>
+
+
+    </form>
+    <div class="col-xs-12">
+      <h2 class="text text-center"> Datos del producto a registrar: </h2>
+      <h3 *ngIf="producto.nombre !=null && producto.nombre !=''"> Producto={{producto.nombre}} </h3>
+      <h3 *ngIf="producto.precio !=null && producto.precio !=''"> Precio= S/. {{producto.precio}} </h3>
+      <h3 *ngIf="producto.tipoProducto !=null "> Tipo de Producto= {{producto.tipoProducto}}</h3>
+      <a routerLink="/home" routerLinkActive="active">Home</a>
     </div>
-    <div class="form-group">
-      <label for="txtPrecio">Precio:</label>
-      <input id="txtPrecio" type="text" class="form-control" name="txtPrecio" [(ngModel)]="producto.precio" placeholder="ingrese precio"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="cmbTipoProducto">Tipo producto:</label>
-      <select class="form-control" id="cmbTipoProducto" (change)=selectTipoProducto($event) required>
-        <option *ngFor="let tipoProducto of listaTipoProducto" [value]="tipoProducto">{{tipoProducto}}</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit" (click)="agregarProducto()">Registrar</button>
-      <button class="btn btn-danger" type="submit" (click)="vaciarProductos()">Vaciar lista</button>
-
-    </div>
 
 
-  </form>
-
-  <h2> Datos del producto a registrar: </h2>
-  <h3 *ngIf="producto.nombre !=null && producto.nombre !=''" > Producto={{producto.nombre}} </h3>
-  <h3 *ngIf="producto.precio !=null && producto.precio !=''"> Precio= S/. {{producto.precio}} </h3>
-  <h3 *ngIf="producto.tipoProducto !=null "> Tipo de Producto= {{producto.tipoProducto}}</h3>
-  <a routerLink="/home" routerLinkActive="active">Home</a>
-  <div *ngIf="listaProductos.length>0">
-
-    <h2>Lista de productos agregados</h2>
-
-    <li *ngFor="let prod of listaProductos">
-      <ul>{{prod.nombre}}</ul>
-      <ul>{{prod.precio}}</ul>
-      <ul>{{prod.tipoProducto}}</ul>
-    </li>
   </div>
+  <div class="col-xs-6">
+    <table class="table table-hover">
+      <tr>
+        <th>Nro.</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Tipo Producto</th>
+      </tr>
+      <tr *ngFor="let prod of listaProductos">
+        <td>1</td>
+        <td>{{prod.nombre}}</td>
+        <td>{{prod.precio}}</td>
+        <td>{{prod.tipoProducto}}</td>
+      </tr>
+    </table>
+    <div *ngIf="listaProductos.length>0">
+
+      <h2>Lista de productos agregados</h2>
+
+      <li *ngFor="let prod of listaProductos">
+       
+        <ul>{{prod.nombre}}</ul>
+        <ul>{{prod.precio}}</ul>
+        <ul>{{prod.tipoProducto}}</ul>
+      </li>
+    </div>
+
+  </div>
+
+
+
+
 </div>
